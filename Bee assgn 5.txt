@@ -1,0 +1,527 @@
+test> use students
+students>
+students> db.students.find({grade:{ $ne:"A"}},{name:1,grade:1,_id:
+0})
+[ { name: 'Alice', grade: 'B' }, { name: 'Alice', grade: 'B' } ]
+students> db.students.find({age:{$lt:18} },{ name:1,age:1,class:1,
+_id:0})
+
+students> db.students.insertOne({"name":"kashish","age":14,"_id":4050})
+{ acknowledged: true, insertedId: 4050 }
+students>  db.students.find({age:{$lt:18} },{ name:1,age:1,class:1,
+...
+...
+...
+students> db.students.find({age:{$lt:18} },{ name:1,age:1,class:1,_id:0})
+[ { name: 'kashish', age: 14 } ]
+students> use employees
+switched to db employees
+employees> db.employees.find({experience:{$gt:10}},{employee_id:0,name:1,department:1,experience:0})
+MongoServerError[Location31253]: Cannot do inclusion on field name in exclusion projection
+employees> db.employees.find({experience:{$gt:10}},{employee_id:0,name:1,department:1})
+MongoServerError[Location31253]: Cannot do inclusion on field name in exclusion projection
+employees> db.employees.find({experience:{$gt:10}},{name:1,department:1})
+
+employees> db.employees.insertOne({"employee_id":2302,"name":"Kritika","department":"Cse","experience":15})
+{
+  acknowledged: true,
+  insertedId: ObjectId('672b08f371394829232710bc')
+}
+employees> db.employees.insertOne({"employee_id":3634,"name":"Bourbon","department":"Ece","experience":8})
+{
+  acknowledged: true,
+  insertedId: ObjectId('672b092f71394829232710bd')
+}
+employees> db.employees.insertOne({"employee_id":3537,"name":"Meera","department":"bba","experience":18})
+{
+  acknowledged: true,
+  insertedId: ObjectId('672b094f71394829232710be')
+}
+employees> db.employees.insertOne({"employee_id":3572,"name":"Trisha","department":"bcom","experience":5})
+{
+  acknowledged: true,
+  insertedId: ObjectId('672b096e71394829232710bf')
+}
+employees> db.employees.find({experience:{$gt:10}},{employee_id:0,name:1,department:1})
+MongoServerError[Location31253]: Cannot do inclusion on field name in exclusion projection
+employees> db.employees.find({experience:{$gt:10}},{name:1,department:1})
+[
+  {
+    _id: ObjectId('672b08f371394829232710bc'),
+    name: 'Kritika',
+    department: 'Cse'
+  },
+  {
+    _id: ObjectId('672b094f71394829232710be'),
+    name: 'Meera',
+    department: 'bba'
+  }
+]
+employees> use courses
+switched to db courses
+courses> db.courses.insertOne({"course_name":"abc","instructor":"shivani","duration":5})
+{
+  acknowledged: true,
+  insertedId: ObjectId('672b0a2571394829232710c0')
+}
+courses> db.courses.insertOne({"course_name":"def","instructor":"mitika","duration":15})
+{
+  acknowledged: true,
+  insertedId: ObjectId('672b0a4371394829232710c1')
+}
+courses> db.courses.insertOne({"course_name":"rst","instructor":"joker","duration":20})
+{
+  acknowledged: true,
+  insertedId: ObjectId('672b0b2c71394829232710c2')
+}
+courses> db.courses.insertOne({"course_name":"xyz","instructor":"merry","duration":7})
+{
+  acknowledged: true,
+  insertedId: ObjectId('672b0b4c71394829232710c3')
+}
+
+courses> db.courses.find({experience:{$gt:12}},{course_name:1,instructor:1})
+
+courses> db.courses.find({duration:{$gt:12}},{course_name:1,instructor:1})
+[
+  {
+    _id: ObjectId('672b0a4371394829232710c1'),
+    course_name: 'def',
+    instructor: 'mitika'
+  },
+  {
+    _id: ObjectId('672b0b2c71394829232710c2'),
+    course_name: 'rst',
+    instructor: 'joker'
+  }
+]
+courses> db.courses.find({duration:{$gte:12}},{course_name:1,instructor:1})
+[
+  {
+    _id: ObjectId('672b0a4371394829232710c1'),
+    course_name: 'def',
+    instructor: 'mitika'
+  },
+  {
+    _id: ObjectId('672b0b2c71394829232710c2'),
+    course_name: 'rst',
+    instructor: 'joker'
+  }
+]
+courses>
+
+Connecting to:          mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.3.0
+Using MongoDB:          7.0.14
+Using Mongosh:          2.3.0
+mongosh 2.3.3 is available for download: https://www.mongodb.com/try/download/shell
+
+For mongosh info see: https://www.mongodb.com/docs/mongodb-shell/
+
+------
+   The server generated these startup warnings when booting
+   2024-10-23T09:17:07.805+05:30: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+------
+
+test> use inventory
+switched to db inventory
+inventory> db.inventory.insertOne({"item_name":"Maggie","price":10,"stock":200})
+{
+  acknowledged: true,
+  insertedId: ObjectId('672c4271a1a7a625ce2710bc')
+}
+inventory> db.inventory.insertOne({"item_name":"Pasta","price":150,"stock":100})
+{
+  acknowledged: true,
+  insertedId: ObjectId('672c42b2a1a7a625ce2710bd')
+}
+inventory> db.inventory.insertOne({"item_name":"Chocolate","price":300,"stock":70})
+{
+  acknowledged: true,
+  insertedId: ObjectId('672c42c9a1a7a625ce2710be')
+}
+inventory> db.inventory.insertOne({"item_name":"Teddy","price":50,"stock":40})
+{
+  acknowledged: true,
+  insertedId: ObjectId('672c42dea1a7a625ce2710bf')
+}
+inventory> db.inventory.find()
+[
+  {
+    _id: ObjectId('672c4271a1a7a625ce2710bc'),
+    item_name: 'Maggie',
+    price: 10,
+    stock: 200
+  },
+  {
+    _id: ObjectId('672c42b2a1a7a625ce2710bd'),
+    item_name: 'Pasta',
+    price: 150,
+    stock: 100
+  },
+  {
+    _id: ObjectId('672c42c9a1a7a625ce2710be'),
+    item_name: 'Chocolate',
+    price: 300,
+    stock: 70
+  },
+  {
+    _id: ObjectId('672c42dea1a7a625ce2710bf'),
+    item_name: 'Teddy',
+    price: 50,
+    stock: 40
+  }
+]
+inventory> db.inventory.find({price:{$lte:100}},{item_name:1,price:1})
+[
+  {
+    _id: ObjectId('672c4271a1a7a625ce2710bc'),
+    item_name: 'Maggie',
+    price: 10
+  },
+  {
+    _id: ObjectId('672c42dea1a7a625ce2710bf'),
+    item_name: 'Teddy',
+    price: 50
+  }
+]
+inventory> use students
+switched to db students
+students> db.students.find()
+[
+  {
+    _id: ObjectId('672af3204ca2bc01d02710bc'),
+    name: 'Alice',
+    age: 20,
+    grade: 'B'
+  },
+  {
+    _id: ObjectId('672af3bc4ca2bc01d02710bd'),
+    name: 'Alice',
+    age: 20,
+    grade: 'B'
+  },
+  {
+    _id: ObjectId('672af4514ca2bc01d02710be'),
+    name: 'John',
+    age: 18,
+    grade: 'A'
+  },
+  { _id: 4050, name: 'kashish', age: 14 }
+]
+students> db.students.deleteOne({"name":"Alice"})
+{ acknowledged: true, deletedCount: 1 }
+students> db.students.find()
+[
+  {
+    _id: ObjectId('672af3bc4ca2bc01d02710bd'),
+    name: 'Alice',
+    age: 20,
+    grade: 'B'
+  },
+  {
+    _id: ObjectId('672af4514ca2bc01d02710be'),
+    name: 'John',
+    age: 18,
+    grade: 'A'
+  },
+  { _id: 4050, name: 'kashish', age: 14 }
+]
+students> db.students.insertOne({"name":"Alice","rollno":123})
+{
+  acknowledged: true,
+  insertedId: ObjectId('672c448ba1a7a625ce2710c0')
+}
+students> db.students.insertOne({"name":"Bob","rollno":134)
+Uncaught:
+SyntaxError: Unexpected token, expected "," (1:48)
+
+> 1 | db.students.insertOne({"name":"Bob","rollno":134)
+    |                                                 ^
+  2 |
+
+students> db.students.insertOne({"name":"Bob","rollno":134})
+{
+  acknowledged: true,
+  insertedId: ObjectId('672c44afa1a7a625ce2710c1')
+}
+students> db.students.insertOne({"name":"Charlie","rollno":245})
+{
+  acknowledged: true,
+  insertedId: ObjectId('672c44c5a1a7a625ce2710c2')
+}
+students> db.students.find()
+[
+  {
+    _id: ObjectId('672af3bc4ca2bc01d02710bd'),
+    name: 'Alice',
+    age: 20,
+    grade: 'B'
+  },
+  {
+    _id: ObjectId('672af4514ca2bc01d02710be'),
+    name: 'John',
+    age: 18,
+    grade: 'A'
+  },
+  { _id: 4050, name: 'kashish', age: 14 },
+  {
+    _id: ObjectId('672c448ba1a7a625ce2710c0'),
+    name: 'Alice',
+    rollno: 123
+  },
+  {
+    _id: ObjectId('672c44afa1a7a625ce2710c1'),
+    name: 'Bob',
+    rollno: 134
+  },
+  {
+    _id: ObjectId('672c44c5a1a7a625ce2710c2'),
+    name: 'Charlie',
+    rollno: 245
+  }
+]
+students> db.students.find({"name":{$in:["Alice","Bob","Charlie"]}},{"name":1,"rollno":1})
+[
+  { _id: ObjectId('672af3bc4ca2bc01d02710bd'), name: 'Alice' },
+  {
+    _id: ObjectId('672c448ba1a7a625ce2710c0'),
+    name: 'Alice',
+    rollno: 123
+  },
+  {
+    _id: ObjectId('672c44afa1a7a625ce2710c1'),
+    name: 'Bob',
+    rollno: 134
+  },
+  {
+    _id: ObjectId('672c44c5a1a7a625ce2710c2'),
+    name: 'Charlie',
+    rollno: 245
+  }
+]
+students> use library
+switched to db library
+library> db.library.insertOne({"title":Bible,"author":Jesus,"pages":100})
+ReferenceError: Bible is not defined
+library> db.library.insertOne({"title":"Bible","author":"Jesus","pages":100})
+{
+  acknowledged: true,
+  insertedId: ObjectId('672c468da1a7a625ce2710c3')
+}
+library> db.library.insertOne({"title":"Emily in paris","author":"minnie","pages":60})
+{
+  acknowledged: true,
+  insertedId: ObjectId('672c46c8a1a7a625ce2710c4')
+}
+library> db.library.insertOne({"title":"Emily","author":"parrot","pages":63})
+{
+  acknowledged: true,
+  insertedId: ObjectId('672c46dfa1a7a625ce2710c5')
+}
+library> db.library.deleteOne({"title":"Emily"})
+{ acknowledged: true, deletedCount: 1 }
+library> db.library.insertOne({"title":"war of angels","author":"minion","pages":300})
+{
+  acknowledged: true,
+  insertedId: ObjectId('672c471fa1a7a625ce2710c6')
+}
+library> db.library.insertOne({"title":"war of angels2","author":"minion2","pages":400})
+{
+  acknowledged: true,
+  insertedId: ObjectId('672c4747a1a7a625ce2710c7')
+}
+library> db.library.find(
+...   { pages: { $gt: 150, $lt: 500 } },
+...   { title: 1, pages: 1, _id: 0 }
+... )
+[
+  { title: 'war of angels', pages: 300 },
+  { title: 'war of angels2', pages: 400 }
+]
+library> use employees
+switched to db employees
+employees> db.employees.find()
+[
+  {
+    _id: ObjectId('672b08f371394829232710bc'),
+    employee_id: 2302,
+    name: 'Kritika',
+    department: 'Cse',
+    experience: 15
+  },
+  {
+    _id: ObjectId('672b092f71394829232710bd'),
+    employee_id: 3634,
+    name: 'Bourbon',
+    department: 'Ece',
+    experience: 8
+  },
+  {
+    _id: ObjectId('672b094f71394829232710be'),
+    employee_id: 3537,
+    name: 'Meera',
+    department: 'bba',
+    experience: 18
+  },
+  {
+    _id: ObjectId('672b096e71394829232710bf'),
+    employee_id: 3572,
+    name: 'Trisha',
+    department: 'bcom',
+    experience: 5
+  }
+]
+employees> db.employees.insertOne({"name":"abc","department":"k","salary":60
+000})
+{
+  acknowledged: true,
+  insertedId: ObjectId('672c4820a1a7a625ce2710c8')
+}
+employees> db.employees.insertOne({"name":"sabc","department":"kg","salary":100000})
+{
+  acknowledged: true,
+  insertedId: ObjectId('672c4844a1a7a625ce2710c9')
+}
+employees> db.employees.insertOne({"name":"sab","department":"kbg","salary":400000})
+{
+  acknowledged: true,
+  insertedId: ObjectId('672c4850a1a7a625ce2710ca')
+}
+employees> db.employees.insertOne({"name":"sabt","department":"kg","salary":4000})
+{
+  acknowledged: true,
+  insertedId: ObjectId('672c485ca1a7a625ce2710cb')
+}
+employees> db.employees.find({ department: { $ne: "HR" }, salary: { $gt: 60000 } },{"name":1,"salary":1})
+[
+  {
+    _id: ObjectId('672c4844a1a7a625ce2710c9'),
+    name: 'sabc',
+    salary: 100000
+  },
+  {
+    _id: ObjectId('672c4850a1a7a625ce2710ca'),
+    name: 'sab',
+    salary: 400000
+  }
+]
+employees> use orders
+switched to db orders
+orders> db.orders.insertOne("order_id":123,"status":"in progress","total_amount":3000})
+Uncaught:
+SyntaxError: Unexpected token, expected "," (1:30)
+
+> 1 | db.orders.insertOne("order_id":123,"status":"in progress","total_amount":3000})
+    |                               ^
+  2 |
+
+orders> db.orders.insertOne({"order_id":123,"status":"in progress","total_amount":3000})
+{
+  acknowledged: true,
+  insertedId: ObjectId('672c4925a1a7a625ce2710cc')
+}
+orders> db.orders.insertOne({"order_id":126,"status":"completed","total_amount":6300})
+{
+  acknowledged: true,
+  insertedId: ObjectId('672c493aa1a7a625ce2710cd')
+}
+orders> db.orders.insertOne({"order_id":127,"status":"invalid","total_amount":7300})
+{
+  acknowledged: true,
+  insertedId: ObjectId('672c4950a1a7a625ce2710ce')
+}
+orders> db.orders.find({{ status: { $in: ["completed", "in progress"] } },{ order_id: 1, status: 1, _id: 0 })
+Uncaught:
+SyntaxError: Unexpected token (1:16)
+
+> 1 | db.orders.find({{ status: { $in: ["completed", "in progress"] } },{ order_id: 1, status: 1, _id: 0 })
+    |                 ^
+  2 |
+
+orders> db.orders.find({{ status: { $in: ["completed", "in progress"] } },{ order_id: 1, status: 1,})
+Uncaught:
+SyntaxError: Unexpected token (1:16)
+
+> 1 | db.orders.find({{ status: { $in: ["completed", "in progress"] } },{ order_id: 1, status: 1,})
+    |                 ^
+  2 |
+
+orders> db.orders.find({ status: { $in: ["completed", "in progress"] } },{ order_id: 1, status: 1,})
+[
+  {
+    _id: ObjectId('672c4925a1a7a625ce2710cc'),
+    order_id: 123,
+    status: 'in progress'
+  },
+  {
+    _id: ObjectId('672c493aa1a7a625ce2710cd'),
+    order_id: 126,
+    status: 'completed'
+  }
+]
+orders> use students
+switched to db students
+students> db.students.find()
+[
+  {
+    _id: ObjectId('672af3bc4ca2bc01d02710bd'),
+    name: 'Alice',
+    age: 20,
+    grade: 'B'
+  },
+  {
+    _id: ObjectId('672af4514ca2bc01d02710be'),
+    name: 'John',
+    age: 18,
+    grade: 'A'
+  },
+  { _id: 4050, name: 'kashish', age: 14 },
+  {
+    _id: ObjectId('672c448ba1a7a625ce2710c0'),
+    name: 'Alice',
+    rollno: 123
+  },
+  {
+    _id: ObjectId('672c44afa1a7a625ce2710c1'),
+    name: 'Bob',
+    rollno: 134
+  },
+  {
+    _id: ObjectId('672c44c5a1a7a625ce2710c2'),
+    name: 'Charlie',
+    rollno: 245
+  }
+]
+students> db.students.insertMany([
+...   { name: "Alice", roll: 501, department: "Biology" },
+...   { name: "Bob", roll: 450, department: "Chemistry" },
+...   { name: "Charlie", roll: 600, department: "Physics" },
+...   { name: "David", roll: 520, department: "Mathematics" },
+...   { name: "Eve", roll: 510, department: "Chemistry" },
+...   { name: "Frank", roll: 498, department: "Biology" },
+...   { name: "Grace", roll: 550, department: "Physics" }
+... ])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('672c4a1aa1a7a625ce2710cf'),
+    '1': ObjectId('672c4a1aa1a7a625ce2710d0'),
+    '2': ObjectId('672c4a1aa1a7a625ce2710d1'),
+    '3': ObjectId('672c4a1aa1a7a625ce2710d2'),
+    '4': ObjectId('672c4a1aa1a7a625ce2710d3'),
+    '5': ObjectId('672c4a1aa1a7a625ce2710d4'),
+    '6': ObjectId('672c4a1aa1a7a625ce2710d5')
+  }
+}
+students> db.students.find(
+...   {
+...     roll: { $gte: 500 },
+...     department: { $in: ["Biology", "Chemistry", "Physics"] }
+...   },
+...   { name: 1, roll: 1, department: 1, _id: 0 }
+... )
+[
+  { name: 'Alice', roll: 501, department: 'Biology' },
+  { name: 'Charlie', roll: 600, department: 'Physics' },
+  { name: 'Eve', roll: 510, department: 'Chemistry' },
+  { name: 'Grace', roll: 550, department: 'Physics' }
