@@ -1,0 +1,501 @@
+Connecting to:          mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.3.0
+Using MongoDB:          7.0.14
+Using Mongosh:          2.3.0
+mongosh 2.3.3 is available for download: https://www.mongodb.com/try/download/shell
+
+For mongosh info see: https://www.mongodb.com/docs/mongodb-shell/
+
+------
+   The server generated these startup warnings when booting
+   2024-10-23T09:17:07.805+05:30: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+------
+
+test> use employees
+switched to db employees
+employees> db.employees.find()
+[
+  {
+    _id: ObjectId('672b08f371394829232710bc'),
+    employee_id: 2302,
+    name: 'Kritika',
+    department: 'Cse',
+    experience: 15
+  },
+  {
+    _id: ObjectId('672b092f71394829232710bd'),
+    employee_id: 3634,
+    name: 'Bourbon',
+    department: 'Ece',
+    experience: 8
+  },
+  {
+    _id: ObjectId('672b094f71394829232710be'),
+    employee_id: 3537,
+    name: 'Meera',
+    department: 'bba',
+    experience: 18
+  },
+  {
+    _id: ObjectId('672b096e71394829232710bf'),
+    employee_id: 3572,
+    name: 'Trisha',
+    department: 'bcom',
+    experience: 5
+  },
+  {
+    _id: ObjectId('672c4820a1a7a625ce2710c8'),
+    name: 'abc',
+    department: 'k',
+    salary: 60000
+  },
+  {
+    _id: ObjectId('672c4844a1a7a625ce2710c9'),
+    name: 'sabc',
+    department: 'kg',
+    salary: 100000
+  },
+  {
+    _id: ObjectId('672c4850a1a7a625ce2710ca'),
+    name: 'sab',
+    department: 'kbg',
+    salary: 400000
+  },
+  {
+    _id: ObjectId('672c485ca1a7a625ce2710cb'),
+    name: 'sabt',
+    department: 'kg',
+    salary: 4000
+  }
+]
+employees>  db.employees.find({$or:[{age:{$gt:30}},{experience:{$gt:5}}]})
+[
+  {
+    _id: ObjectId('672b08f371394829232710bc'),
+    employee_id: 2302,
+    name: 'Kritika',
+    department: 'Cse',
+    experience: 15
+  },
+  {
+    _id: ObjectId('672b092f71394829232710bd'),
+    employee_id: 3634,
+    name: 'Bourbon',
+    department: 'Ece',
+    experience: 8
+  },
+  {
+    _id: ObjectId('672b094f71394829232710be'),
+    employee_id: 3537,
+    name: 'Meera',
+    department: 'bba',
+    experience: 18
+  }
+]
+employees> use products
+switched to db products
+products>  db.products.find({$or: [{stock: {$gt: 0}}, {price: {$lt: 50}}]})
+
+products> db.products.find()
+
+products> db.products.insertMany([
+...   { product_name: "Laptop Sleeve", stock: 10, price: 25 },
+...   { product_name: "Wireless Mouse", stock: 5, price: 45 },
+...   { product_name: "USB-C Cable", stock: 0, price: 15 },
+...   { product_name: "Notebook", stock: 20, price: 5 },
+...   { product_name: "Portable Charger", stock: 7, price: 35 },
+...   { product_name: "Bluetooth Speaker", stock: 0, price: 50 },
+...
+...
+products>
+
+products> db.products.insertMany([
+...   { product_name: "Laptop Sleeve", stock: 10, price: 25 },
+...   { product_name: "Wireless Mouse", stock: 5, price: 45 },
+...   { product_name: "USB-C Cable", stock: 0, price: 15 },
+...   { product_name: "Notebook", stock: 20, price: 5 },
+...   { product_name: "Portable Charger", stock: 7, price: 35 },
+...   { product_name: "Bluetooth Speaker", stock: 0, price: 50 },
+...   { product_name: "Desk Lamp", stock: 3,price:49}])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('672c517ae2e1fe91232710bc'),
+    '1': ObjectId('672c517ae2e1fe91232710bd'),
+    '2': ObjectId('672c517ae2e1fe91232710be'),
+    '3': ObjectId('672c517ae2e1fe91232710bf'),
+    '4': ObjectId('672c517ae2e1fe91232710c0'),
+    '5': ObjectId('672c517ae2e1fe91232710c1'),
+    '6': ObjectId('672c517ae2e1fe91232710c2')
+  }
+}
+products> db.products.find({$or: [{stock: {$gt: 0}}, {price: {$lt: 50}}]})
+[
+  {
+    _id: ObjectId('672c517ae2e1fe91232710bc'),
+    product_name: 'Laptop Sleeve',
+    stock: 10,
+    price: 25
+  },
+  {
+    _id: ObjectId('672c517ae2e1fe91232710bd'),
+    product_name: 'Wireless Mouse',
+    stock: 5,
+    price: 45
+  },
+  {
+    _id: ObjectId('672c517ae2e1fe91232710be'),
+    product_name: 'USB-C Cable',
+    stock: 0,
+    price: 15
+  },
+  {
+    _id: ObjectId('672c517ae2e1fe91232710bf'),
+    product_name: 'Notebook',
+    stock: 20,
+    price: 5
+  },
+  {
+    _id: ObjectId('672c517ae2e1fe91232710c0'),
+    product_name: 'Portable Charger',
+    stock: 7,
+    price: 35
+  },
+  {
+    _id: ObjectId('672c517ae2e1fe91232710c2'),
+    product_name: 'Desk Lamp',
+    stock: 3,
+    price: 49
+  }
+]
+products> use students
+switched to db students
+students> db.students.insertMany([
+...   { name: "Alice", enrolled: true, grade: "A" },
+...   { name: "Bob", enrolled: false, grade: "B" },
+...   { name: "Charlie", enrolled: true, grade: "D" },
+...   { name: "David", enrolled: false, grade: "C" },
+...   { name: "Eve", enrolled: true, grade: "B" },
+...   { name: "Frank", enrolled: true, grade: "F" },
+...   { name: "Grace", enrolled: false, grade: "A" }
+... ])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('672c51f5e2e1fe91232710c3'),
+    '1': ObjectId('672c51f5e2e1fe91232710c4'),
+    '2': ObjectId('672c51f5e2e1fe91232710c5'),
+    '3': ObjectId('672c51f5e2e1fe91232710c6'),
+    '4': ObjectId('672c51f5e2e1fe91232710c7'),
+    '5': ObjectId('672c51f5e2e1fe91232710c8'),
+    '6': ObjectId('672c51f5e2e1fe91232710c9')
+  }
+}
+students> db.students.find({$or: [{enrolled: false}, {grade: {$lt: "C"}}]})
+[
+  {
+    _id: ObjectId('672af3bc4ca2bc01d02710bd'),
+    name: 'Alice',
+    age: 20,
+    grade: 'B'
+  },
+  {
+    _id: ObjectId('672af4514ca2bc01d02710be'),
+    name: 'John',
+    age: 18,
+    grade: 'A'
+  },
+  {
+    _id: ObjectId('672c51f5e2e1fe91232710c3'),
+    name: 'Alice',
+    enrolled: true,
+    grade: 'A'
+  },
+  {
+    _id: ObjectId('672c51f5e2e1fe91232710c4'),
+    name: 'Bob',
+    enrolled: false,
+    grade: 'B'
+  },
+  {
+    _id: ObjectId('672c51f5e2e1fe91232710c6'),
+    name: 'David',
+    enrolled: false,
+    grade: 'C'
+  },
+  {
+    _id: ObjectId('672c51f5e2e1fe91232710c7'),
+    name: 'Eve',
+    enrolled: true,
+    grade: 'B'
+  },
+  {
+    _id: ObjectId('672c51f5e2e1fe91232710c9'),
+    name: 'Grace',
+    enrolled: false,
+    grade: 'A'
+  }
+]
+students> db.courses.insertMany([
+...   { course_name: "Mathematics", duration: 4, instructor: "Dr. Smith" },
+...   { course_name: "History", duration: 8 },
+...   { course_name: "Biology", duration: 5, instructor: "Dr. Johnson" },
+...   { course_name: "Chemistry", duration: 10, instructor: "Dr. Lee" }
+... ])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('672c5258e2e1fe91232710ca'),
+    '1': ObjectId('672c5258e2e1fe91232710cb'),
+    '2': ObjectId('672c5258e2e1fe91232710cc'),
+    '3': ObjectId('672c5258e2e1fe91232710cd')
+  }
+}
+students> db.courses.find({$or: [{duration: {$lt: 6}}, {instructor: null}]})
+
+[
+  {
+    _id: ObjectId('672c5258e2e1fe91232710ca'),
+    course_name: 'Mathematics',
+    duration: 4,
+    instructor: 'Dr. Smith'
+  },
+  {
+    _id: ObjectId('672c5258e2e1fe91232710cb'),
+    course_name: 'History',
+    duration: 8
+  },
+  {
+    _id: ObjectId('672c5258e2e1fe91232710cc'),
+    course_name: 'Biology',
+    duration: 5,
+    instructor: 'Dr. Johnson'
+  }
+]
+students> db.orders.find({$or:[{status:{$ne: "shipped"}},{shipped_date:{$exi$exists: false}}]})
+
+students> db.orders.find({$or:[{status:{$ne: "shipped"}},{shipped_date:{$exi$exists: false}}]})
+students> $or: [
+...   { status: { $ne: "shipped" } },     // Matches orders where status is not "shipped".
+...   { shipped_date: { $exists: false } } // Matches orders where shipped_date is missing.
+... ]
+[
+  { status: { '$ne': 'shipped' } },
+  { shipped_date: { '$exists': false } }
+]
+students> db.employees.insertMany([
+...   { name: "Alice", department: "Engineering" },
+...   { name: "Bob", department: "IT" },
+...   { name: "Charlie", department: "HR" },
+...   { name: "David", department: "Finance" },
+...   { name: "Eve", department: "Marketing" },
+...   { name: "Frank", department: "IT" },
+...   { name: "Grace", department: "Sales" }
+... ])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('672c52fae2e1fe91232710ce'),
+    '1': ObjectId('672c52fae2e1fe91232710cf'),
+    '2': ObjectId('672c52fae2e1fe91232710d0'),
+    '3': ObjectId('672c52fae2e1fe91232710d1'),
+    '4': ObjectId('672c52fae2e1fe91232710d2'),
+    '5': ObjectId('672c52fae2e1fe91232710d3'),
+    '6': ObjectId('672c52fae2e1fe91232710d4')
+  }
+}
+students> db.employees.find(
+...   {
+...     department: { $nin: ["Engineering", "IT"] }
+...   },
+...   { name: 1, department: 1, _id: 0 }
+... )
+[
+  { name: 'Charlie', department: 'HR' },
+  { name: 'David', department: 'Finance' },
+  { name: 'Eve', department: 'Marketing' },
+  { name: 'Grace', department: 'Sales' }
+]
+students> db.students.insertMany([
+...   { name: "Alice", exam_score: 45, participation: false },
+...   { name: "Bob", exam_score: 80, participation: true },
+...   { name: "Charlie", exam_score: 30, participation: false },
+...   { name: "David", exam_score: 60, participation: true },
+...   { name: "Eve", exam_score: 40, participation: false },
+...   { name: "Frank", exam_score: 55, participation: true },
+...   { name: "Grace", exam_score: 35, participation: false }
+... ])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('672c53a3e2e1fe91232710d5'),
+    '1': ObjectId('672c53a3e2e1fe91232710d6'),
+    '2': ObjectId('672c53a3e2e1fe91232710d7'),
+    '3': ObjectId('672c53a3e2e1fe91232710d8'),
+    '4': ObjectId('672c53a3e2e1fe91232710d9'),
+    '5': ObjectId('672c53a3e2e1fe91232710da'),
+    '6': ObjectId('672c53a3e2e1fe91232710db')
+  }
+}
+students> db.students.find(
+...   {
+...     exam_score: { $lt: 50 },           // Exam score less than 50
+...     participation: false               // No participation in extracurricular activities
+...   },
+...   { name: 1, exam_score: 1, participation: 1, _id: 0 }  // Displaying only name, exam_score, and participation fields
+... )
+[
+  { name: 'Alice', exam_score: 45, participation: false },
+  { name: 'Charlie', exam_score: 30, participation: false },
+  { name: 'Eve', exam_score: 40, participation: false },
+  { name: 'Grace', exam_score: 35, participation: false }
+]
+students>
+
+students> db.employees.insertMany([
+...   { name: "Alice", department: "Sales", experience: 4, age: 30 },
+...   { name: "Bob", department: "Sales", experience: 2, age: 23 },
+...   { name: "Charlie", department: "Engineering", experience: 5, age: 28 },
+...   { name: "David", department: "Sales", experience: 6, age: 24 },
+...   { name: "Eve", department: "Sales", experience: 3, age: 22 },
+...   { name: "Frank", department: "Sales", experience: 2, age: 26 }
+... ])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('672c541ce2e1fe91232710dc'),
+    '1': ObjectId('672c541ce2e1fe91232710dd'),
+    '2': ObjectId('672c541ce2e1fe91232710de'),
+    '3': ObjectId('672c541ce2e1fe91232710df'),
+    '4': ObjectId('672c541ce2e1fe91232710e0'),
+    '5': ObjectId('672c541ce2e1fe91232710e1')
+  }
+}
+students> db.employees.find(
+...   {
+...     department: "Sales",                            // Employees in "Sales" department
+...     $or: [
+...       { experience: { $gt: 3 } },                   // Employees with more than 3 years of experience
+...       { age: { $lt: 25 } }                          // Employees younger
+ than 25 years old
+...     ]
+...   },
+...   { name: 1, department: 1, experience: 1, age: 1, _id: 0 } // Projecting name, department, experience, and age
+... )
+[
+  { name: 'Alice', department: 'Sales', experience: 4, age: 30 },
+  { name: 'Bob', department: 'Sales', experience: 2, age: 23 },
+  { name: 'David', department: 'Sales', experience: 6, age: 24 },
+  { name: 'Eve', department: 'Sales', experience: 3, age: 22 }
+]
+students> use inventory
+switched to db inventory
+inventory> db.inventory.insertMany([
+...   { name: "Laptop", price: 499, stock: 30 },
+...   { name: "Phone", price: 85, stock: 50 },
+...   { name: "Tablet", price: 120, stock: 0 },
+...   { name: "Headphones", price: 40 },   // Missing stock field
+...   { name: "Monitor", stock: 15 },       // Missing price field
+...   { name: "Mouse", price: 25, stock: 100 },
+...   { name: "Keyboard", price: 200, stock: 10 }
+... ])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('672c5467e2e1fe91232710e2'),
+    '1': ObjectId('672c5467e2e1fe91232710e3'),
+    '2': ObjectId('672c5467e2e1fe91232710e4'),
+    '3': ObjectId('672c5467e2e1fe91232710e5'),
+    '4': ObjectId('672c5467e2e1fe91232710e6'),
+    '5': ObjectId('672c5467e2e1fe91232710e7'),
+    '6': ObjectId('672c5467e2e1fe91232710e8')
+  }
+}
+inventory> db.courses.insertMany([
+...   { course_name: "Math 101", enrollment: 25, instructor: "Dr. Smith", duration: 15 },
+...   { course_name: "History 201", enrollment: 8, instructor: "Prof. Brown" },  // Missing duration
+...   { course_name: "Physics 101", enrollment: 15, duration: 10 },
+     // Missing instructor
+...   { course_name: "Chemistry 301", enrollment: 5, instructor: "Dr. White", duration: 12 }, // Low enrollment
+...   { course_name: "Biology 101", enrollment: 30, instructor: "Prof. Green", duration: 14 },
+...   { course_name: "Literature 101", enrollment: 7, duration: 8 }
+    // Missing instructor
+... ])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('672c549de2e1fe91232710e9'),
+    '1': ObjectId('672c549de2e1fe91232710ea'),
+    '2': ObjectId('672c549de2e1fe91232710eb'),
+    '3': ObjectId('672c549de2e1fe91232710ec'),
+    '4': ObjectId('672c549de2e1fe91232710ed'),
+    '5': ObjectId('672c549de2e1fe91232710ee')
+  }
+}
+inventory> db.courses.find(
+...   {
+...     $or: [
+...       { enrollment: { $lt: 10 } },      // Less than 10 students enrolled
+...       { instructor: { $exists: false } }, // Missing instructor field
+...       { duration: { $exists: false } }   // Missing duration field
+...     ]
+...   },
+...   { _id: 0, course_name: 1, enrollment: 1, instructor: 1, duration: 1 }
+... )
+[
+  {
+    course_name: 'History 201',
+    enrollment: 8,
+    instructor: 'Prof. Brown'
+  },
+  { course_name: 'Physics 101', enrollment: 15, duration: 10 },
+  {
+    course_name: 'Chemistry 301',
+    enrollment: 5,
+    instructor: 'Dr. White',
+    duration: 12
+  },
+  { course_name: 'Literature 101', enrollment: 7, duration: 8 }
+]
+inventory> use courses
+switched to db courses
+courses> db.courses.insertMany([
+...   { course_name: "Math 101", instructor: "John Smith", duration: 12 },
+...   { course_name: "History 201", instructor: "Jane Doe", duration: 8 },
+...   { course_name: "Physics 101", instructor: "John Smith", duration: 9 },
+
+...   { course_name: "Chemistry 301", instructor: "Mary Johnson", duration: 6 },
+...   { course_name: "Biology 101", instructor: "James Brown", duration: 15 },
+...   { course_name: "Literature 101", instructor: "John Smith", duration: 7 }
+... ])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('672c54bfe2e1fe91232710ef'),
+    '1': ObjectId('672c54bfe2e1fe91232710f0'),
+    '2': ObjectId('672c54bfe2e1fe91232710f1'),
+    '3': ObjectId('672c54bfe2e1fe91232710f2'),
+    '4': ObjectId('672c54bfe2e1fe91232710f3'),
+    '5': ObjectId('672c54bfe2e1fe91232710f4')
+  }
+}
+courses> db.courses.find(
+
+...   {
+...     $nor: [
+...       { instructor: "John Smith" },      // Courses taught by "John Smith"
+...       { duration: { $gt: 10 } }          // Courses with a duration longer than 10 weeks
+...     ]
+...   },
+...   { _id: 0, course_name: 1, instructor: 1, duration: 1 }  // Projecting relevant fields
+... )
+
+[
+  { course_name: 'abc', instructor: 'shivani', duration: 5 },
+  { course_name: 'xyz', instructor: 'merry', duration: 7 },
+  { course_name: 'History 201', instructor: 'Jane Doe', duration: 8 },
+  {
+    course_name: 'Chemistry 301',
+    instructor: 'Mary Johnson',
+    duration: 6
+  }
+]
