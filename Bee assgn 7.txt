@@ -1,0 +1,1033 @@
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Install the latest PowerShell for new features and improvements! https://aka.ms/PSWindows
+
+PS C:\Users\HP> mongosh
+Current Mongosh Log ID: 672d8c025b577c26890d818f
+Connecting to:          mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.3.3
+Using MongoDB:          8.0.3
+Using Mongosh:          2.3.3
+
+For mongosh info see: https://www.mongodb.com/docs/mongodb-shell/
+
+------
+   The server generated these startup warnings when booting
+   2024-11-06T09:42:37.841+05:30: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+------
+
+test> use products
+switched to db products
+products> db.products.insertMany([
+...     {
+...         "product_id": 1,
+...         "name": "Bluetooth Speaker",
+...         "price": 55,
+...         "stock": 10
+...     },
+...     {
+...         "product_id": 2,
+...         "name": "Wireless Mouse",
+...         "price": 25,
+...         "stock": 0
+...     },
+...     {
+...         "product_id": 3,
+...         "name": "Smartphone Case",
+...         "price": 45,
+...         "stock": 5
+...     },
+...     {
+...         "product_id": 4,
+...         "name": "Gaming Headset",
+...         "price": 150,
+...         "stock": 8
+...     },
+...     {
+...         "product_id": 5,
+...         "name": "Laptop Stand",
+...         "price": 75,
+...         "stock": 3
+...     }
+... ]);
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('672d8c0d5b577c26890d8190'),
+    '1': ObjectId('672d8c0d5b577c26890d8191'),
+    '2': ObjectId('672d8c0d5b577c26890d8192'),
+    '3': ObjectId('672d8c0d5b577c26890d8193'),
+    '4': ObjectId('672d8c0d5b577c26890d8194')
+  }
+}
+products> db.products.find({
+...     price: { $gte: 20, $lte: 100 },
+...     stock: { $gt: 0 }
+... });
+[
+  {
+    _id: ObjectId('672c51af860f7abf460d819c'),
+    product_name: 'Wireless Mouse',
+    stock: 15,
+    price: 25.99
+  },
+  {
+    _id: ObjectId('672c51af860f7abf460d819d'),
+    product_name: 'Bluetooth Speaker',
+    stock: 5,
+    price: 45
+  },
+  {
+    _id: ObjectId('672c51af860f7abf460d81a0'),
+    product_name: 'Laptop Stand',
+    stock: 20,
+    price: 40
+  },
+  {
+    _id: ObjectId('672c51af860f7abf460d81a1'),
+    product_name: 'Wireless Earbuds',
+    stock: 10,
+    price: 49.99
+  },
+  {
+    _id: ObjectId('672d8c0d5b577c26890d8190'),
+    product_id: 1,
+    name: 'Bluetooth Speaker',
+    price: 55,
+    stock: 10
+  },
+  {
+    _id: ObjectId('672d8c0d5b577c26890d8192'),
+    product_id: 3,
+    name: 'Smartphone Case',
+    price: 45,
+    stock: 5
+  },
+  {
+    _id: ObjectId('672d8c0d5b577c26890d8194'),
+    product_id: 5,
+    name: 'Laptop Stand',
+    price: 75,
+    stock: 3
+  }
+]
+products> use students
+switched to db students
+students> db.students.insertMany([
+...     {
+...         "student_id": 1,
+...         "name": "John Doe",
+...         "grade": 90,
+...         "attendance": 92,
+...         "age": 17
+...     },
+...     {
+...         "student_id": 2,
+...         "name": "Jane Smith",
+...         "grade": 80,
+...         "attendance": 85,
+...         "age": 19
+...     },
+...     {
+...         "student_id": 3,
+...         "name": "Mike Johnson",
+...         "grade": 88,
+...         "attendance": 95,
+...         "age": 16
+...     },
+...     {
+...         "student_id": 4,
+...         "name": "Emma Brown",
+...         "grade": 70,
+...         "attendance": 80,
+...         "age": 20
+...     },
+...     {
+...         "student_id": 5,
+...         "name": "Lucas White",
+...         "grade": 91,
+...         "attendance": 88,
+...         "age": 17
+...
+...
+...
+students> db.students.insertMany([
+...     {
+...         "student_id": 1,
+...         "name": "John Doe",
+...         "grade": 90,
+...         "attendance": 92,
+...         "age": 17
+...     },
+...     {
+...         "student_id": 2,
+...         "name": "Jane Smith",
+...         "grade": 80,
+...         "attendance": 85,
+...         "age": 19
+...     },
+...     {
+...         "student_id": 3,
+...         "name": "Mike Johnson",
+...         "grade": 88,
+...         "attendance": 95,
+...         "age": 16
+...     },
+...     {
+...         "student_id": 4,
+...         "name": "Emma Brown",
+...         "grade": 70,
+...         "attendance": 80,
+...         "age": 20
+...     },
+...     {
+...         "student_id": 5,
+...         "name": "Lucas White",
+...         "grade": 91,
+...         "attendance": 88,
+...         "age": 17
+...     }
+... ]);
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('672d8ca65b577c26890d8195'),
+    '1': ObjectId('672d8ca65b577c26890d8196'),
+    '2': ObjectId('672d8ca65b577c26890d8197'),
+    '3': ObjectId('672d8ca65b577c26890d8198'),
+    '4': ObjectId('672d8ca65b577c26890d8199')
+  }
+}
+students> db.students.find({
+...     $or: [
+...         { grade: { $gt: 85 } },
+...         { attendance: { $gt: 90 } },
+...         { age: { $lt: 18 } }
+...     ]
+... });
+[
+  {
+    _id: ObjectId('672d8ca65b577c26890d8195'),
+    student_id: 1,
+    name: 'John Doe',
+    grade: 90,
+    attendance: 92,
+    age: 17
+  },
+  {
+    _id: ObjectId('672d8ca65b577c26890d8197'),
+    student_id: 3,
+    name: 'Mike Johnson',
+    grade: 88,
+    attendance: 95,
+    age: 16
+  },
+  {
+    _id: ObjectId('672d8ca65b577c26890d8199'),
+    student_id: 5,
+    name: 'Lucas White',
+    grade: 91,
+    attendance: 88,
+    age: 17
+  }
+]
+students> use jobs
+switched to db jobs
+jobs> db.jobs.insertMany([
+...     {
+...         "job_id": 1,
+...         "title": "Software Engineer",
+...         "salary": 120000,
+...         "location": "New York",
+...         "company": "TechCorp"
+...     },
+...     {
+...         "job_id": 2,
+...         "title": "Data Scientist",
+...         "salary": 95000,
+...         "location": "San Francisco",
+...         "company": "DataWorks"
+...     },
+...     {
+...         "job_id": 3,
+...         "title": "Product Manager",
+...         "salary": 70000,
+...         "location": "Boston",
+...         "company": "Innovate Inc"
+...     },
+...     {
+...         "job_id": 4,
+...         "title": "Marketing Specialist",
+...         "salary": 48000,
+...         "location": "San Francisco",
+...         "company": "MarketingPro"
+...     },
+...     {
+...         "job_id": 5,
+...         "title": "UX Designer",
+...         "salary": 80000,
+...         "location": "New York",
+...         "company": "DesignX"
+...     }
+... ]);
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('672d8d075b577c26890d819a'),
+    '1': ObjectId('672d8d075b577c26890d819b'),
+    '2': ObjectId('672d8d075b577c26890d819c'),
+    '3': ObjectId('672d8d075b577c26890d819d'),
+    '4': ObjectId('672d8d075b577c26890d819e')
+  }
+}
+jobs> db.jobs.find({
+...     salary: { $gt: 50000 },
+...     location: { $in: ["New York", "San Francisco"] }
+... });
+[
+  {
+    _id: ObjectId('672d8d075b577c26890d819a'),
+    job_id: 1,
+    title: 'Software Engineer',
+    salary: 120000,
+    location: 'New York',
+    company: 'TechCorp'
+  },
+  {
+    _id: ObjectId('672d8d075b577c26890d819b'),
+    job_id: 2,
+    title: 'Data Scientist',
+    salary: 95000,
+    location: 'San Francisco',
+    company: 'DataWorks'
+  },
+  {
+    _id: ObjectId('672d8d075b577c26890d819e'),
+    job_id: 5,
+    title: 'UX Designer',
+    salary: 80000,
+    location: 'New York',
+    company: 'DesignX'
+  }
+]
+jobs> use inventory
+switched to db inventory
+inventory> db.inventory.insertMany([
+...     {
+...         "item_id": 1,
+...         "name": "Smartphone",
+...         "category": "electronics",
+...         "discount": 15,
+...         "stock": 20
+...     },
+...     {
+...         "item_id": 2,
+...         "name": "Laptop",
+...         "category": "electronics",
+...         "discount": 5,
+...         "stock": 10
+...     },
+...     {
+...         "item_id": 3,
+...         "name": "Bluetooth Headphones",
+...         "category": "electronics",
+...         "discount": 20,
+...         "stock": 0
+...     },
+...     {
+...         "item_id": 4,
+...         "name": "LED TV",
+...         "category": "electronics",
+...         "discount": 25,
+...         "stock": 5
+...     },
+...     {
+...         "item_id": 5,
+...         "name": "Microwave Oven",
+...         "category": "home appliances",
+...         "discount": 30,
+...         "stock": 12
+...     },
+...     {
+...         "item_id": 6,
+...         "name": "Tablet",
+...         "category": "electronics",
+...         "discount": 12,
+...         "stock": 15
+...     }
+... ]);
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('672d8d775b577c26890d819f'),
+    '1': ObjectId('672d8d775b577c26890d81a0'),
+    '2': ObjectId('672d8d775b577c26890d81a1'),
+    '3': ObjectId('672d8d775b577c26890d81a2'),
+    '4': ObjectId('672d8d775b577c26890d81a3'),
+    '5': ObjectId('672d8d775b577c26890d81a4')
+  }
+}
+inventory> db.inventory.find({
+...     category: "electronics",
+...     discount: { $gte: 10 },
+...     stock: { $gt: 0 }
+... });
+[
+  {
+    _id: ObjectId('672d8d775b577c26890d819f'),
+    item_id: 1,
+    name: 'Smartphone',
+    category: 'electronics',
+    discount: 15,
+    stock: 20
+  },
+  {
+    _id: ObjectId('672d8d775b577c26890d81a2'),
+    item_id: 4,
+    name: 'LED TV',
+    category: 'electronics',
+    discount: 25,
+    stock: 5
+  },
+  {
+    _id: ObjectId('672d8d775b577c26890d81a4'),
+    item_id: 6,
+    name: 'Tablet',
+    category: 'electronics',
+    discount: 12,
+    stock: 15
+  }
+]
+inventory> use orders
+switched to db orders
+orders> db.orders.insertMany([{
+...   "_id": ObjectId("1"),
+...   "customer_type": "VIP",
+...   "status": "pending",
+...   "amount": 600
+... },
+... {
+...   "_id": ObjectId("2"),
+...   "customer_type": "regular",
+...   "status": "pending",
+...   "amount": 450
+... },
+... {
+...   "_id": ObjectId("3"),
+...   "customer_type": "VIP",
+...   "status": "completed",
+...   "amount": 300
+... },
+... {
+...   "_id": ObjectId("4"),
+...   "customer_type": "regular",
+...   "status": "pending",
+...   "amount": 550
+... }
+...
+... ])
+BSONError: input must be a 24 character hex string, 12 byte Uint8Array, or an integer
+orders> db.orders.insertMany([
+...   {
+...     customer_type: "VIP",
+...     status: "pending",
+...     amount: 600
+...   },
+...   {
+...     customer_type: "regular",
+...     status: "pending",
+...     amount: 450
+...   },
+...   {
+...     customer_type: "VIP",
+...     status: "completed",
+...     amount: 300
+...   },
+...   {
+...     customer_type: "regular",
+...     status: "pending",
+...     amount: 550
+...   }
+... ]);
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('672d8e6c5b577c26890d81a5'),
+    '1': ObjectId('672d8e6c5b577c26890d81a6'),
+    '2': ObjectId('672d8e6c5b577c26890d81a7'),
+    '3': ObjectId('672d8e6c5b577c26890d81a8')
+  }
+}
+orders> db.orders.find({
+...   status: "pending",  // Look for orders with "pending" status
+...   $or: [
+...     { customer_type: "VIP" },       // VIP customers
+...     { amount: { $gt: 500 } }        // Orders with amount greater than $500
+...   ]
+... });
+orders> db.orders.insertMany([
+...   {
+...     customer_type: "VIP",
+...     status: "pending",
+...     amount: 600
+...   },
+...   {
+...     customer_type: "regular",
+...     status: "pending",
+...     amount: 450
+...   },
+...   {
+...     customer_type: "VIP",
+...     status: "completed",
+...     amount: 300
+...   },
+...   {
+...     customer_type: "regular",
+...     status: "pending",
+...     amount: 550
+...   }
+... ]);
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('672d8e855b577c26890d81a9'),
+    '1': ObjectId('672d8e855b577c26890d81aa'),
+    '2': ObjectId('672d8e855b577c26890d81ab'),
+    '3': ObjectId('672d8e855b577c26890d81ac')
+  }
+}
+orders> // Query to find pending orders for VIP customers or those with an amount greater than $500
+
+orders> db.orders.find({
+...   status: "pending",  // Look for orders with "pending" status
+...   $or: [
+...     { customer_type: "VIP" },       // VIP customers
+...     { amount: { $gt: 500 } }        // Orders with amount greater than $500
+...   ]
+... });
+[
+  {
+    _id: ObjectId('672d8e6c5b577c26890d81a5'),
+    customer_type: 'VIP',
+    status: 'pending',
+    amount: 600
+  },
+  {
+    _id: ObjectId('672d8e6c5b577c26890d81a8'),
+    customer_type: 'regular',
+    status: 'pending',
+    amount: 550
+  },
+  {
+    _id: ObjectId('672d8e855b577c26890d81a9'),
+    customer_type: 'VIP',
+    status: 'pending',
+    amount: 600
+  },
+  {
+    _id: ObjectId('672d8e855b577c26890d81ac'),
+    customer_type: 'regular',
+    status: 'pending',
+    amount: 550
+  }
+]
+orders> use students
+switched to db students
+students> db.students.insertMany([
+...   {
+...     name: "Alice",
+...     age: 19,
+...     grade: 58,
+...     attendance: 80
+...   },
+...   {
+...     name: "Bob",
+...     age: 17,
+...     grade: 70,
+...     attendance: 90
+...   },
+...   {
+...     name: "Charlie",
+...     age: 20,
+...     grade: 45,
+...     attendance: 70
+...   },
+...   {
+...     name: "David",
+...     age: 22,
+...     grade: 65,
+...     attendance: 60
+...   },
+...   {
+...     name: "Eva",
+...     age: 16,
+...     grade: 80,
+...     attendance: 85
+...   }
+... ]);
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('672d8ebe5b577c26890d81ad'),
+    '1': ObjectId('672d8ebe5b577c26890d81ae'),
+    '2': ObjectId('672d8ebe5b577c26890d81af'),
+    '3': ObjectId('672d8ebe5b577c26890d81b0'),
+    '4': ObjectId('672d8ebe5b577c26890d81b1')
+  }
+}
+students> // Query to find students who exceed both age and grade limits, or whose attendance is below 75%
+
+students> db.students.find({
+...   $or: [
+...     { $and: [ { age: { $gt: 18 } }, { grade: { $lt: 60 } } ] },  /// Over 18 and grade below 60
+...     { attendance: { $lt: 75 } }  // Attendance below 75%
+...   ]
+... });
+[
+  {
+    _id: ObjectId('672d8ebe5b577c26890d81ad'),
+    name: 'Alice',
+    age: 19,
+    grade: 58,
+    attendance: 80
+  },
+  {
+    _id: ObjectId('672d8ebe5b577c26890d81af'),
+    name: 'Charlie',
+    age: 20,
+    grade: 45,
+    attendance: 70
+  },
+  {
+    _id: ObjectId('672d8ebe5b577c26890d81b0'),
+    name: 'David',
+    age: 22,
+    grade: 65,
+    attendance: 60
+  }
+]
+students> use products
+switched to db products
+products> db.products.insertMany([
+...   {
+...     name: "Sofa",
+...     category: "Furniture",
+...     price: 150,
+...     availability: "In Stock",
+...     stock: 10
+...   },
+...   {
+...     name: "Coffee Table",
+...     category: "Furniture",
+...     price: 120,
+...     availability: "In Stock",
+...     stock: 3
+...   },
+...   {
+...     name: "Dining Chair",
+...     category: "Furniture",
+...     price: 80,
+...     availability: "In Stock",
+...     stock: 50
+...   },
+...   {
+...     name: "Bookshelf",
+...     category: "Furniture",
+...     price: 250,
+...     availability: "Out of Stock",
+...     stock: 0
+...   },
+...   {
+...     name: "Laptop",
+...     category: "Electronics",
+...     price: 1000,
+...     availability: "In Stock",
+...     stock: 20
+...   },
+...   {
+...     name: "Armchair",
+...     category: "Furniture",
+...     price: 180,
+...     availability: "In Stock",
+...     stock: 2
+...   },
+...   {
+...     name: "Desk Lamp",
+...     category: "Electronics",
+...     price: 40,
+...     availability: "In Stock",
+...     stock: 100
+...   }
+... ]);
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('672d8f045b577c26890d81b2'),
+    '1': ObjectId('672d8f045b577c26890d81b3'),
+    '2': ObjectId('672d8f045b577c26890d81b4'),
+    '3': ObjectId('672d8f045b577c26890d81b5'),
+    '4': ObjectId('672d8f045b577c26890d81b6'),
+    '5': ObjectId('672d8f045b577c26890d81b7'),
+    '6': ObjectId('672d8f045b577c26890d81b8')
+  }
+}
+products> // Query to find furniture items with price below $200 or stock less than 5
+
+products> db.products.find({
+...   category: "Furniture",  // Filter for the "Furniture" category
+...   $or: [
+...     { price: { $lt: 200 } },      // Price below $200
+...     { stock: { $lt: 5 } }         // Stock less than 5
+...   ]
+... });
+[
+  {
+    _id: ObjectId('672d8f045b577c26890d81b2'),
+    name: 'Sofa',
+    category: 'Furniture',
+    price: 150,
+    availability: 'In Stock',
+    stock: 10
+  },
+  {
+    _id: ObjectId('672d8f045b577c26890d81b3'),
+    name: 'Coffee Table',
+    category: 'Furniture',
+    price: 120,
+    availability: 'In Stock',
+    stock: 3
+  },
+  {
+    _id: ObjectId('672d8f045b577c26890d81b4'),
+    name: 'Dining Chair',
+    category: 'Furniture',
+    price: 80,
+    availability: 'In Stock',
+    stock: 50
+  },
+  {
+    _id: ObjectId('672d8f045b577c26890d81b5'),
+    name: 'Bookshelf',
+    category: 'Furniture',
+    price: 250,
+    availability: 'Out of Stock',
+    stock: 0
+  },
+  {
+    _id: ObjectId('672d8f045b577c26890d81b7'),
+    name: 'Armchair',
+    category: 'Furniture',
+    price: 180,
+    availability: 'In Stock',
+    stock: 2
+  }
+]
+products> use items
+switched to db items
+items> db.items.insertMany([
+...   {
+...     name: "Photo Editing Software",
+...     type: "software",
+...     price: 50
+...   },
+...   {
+...     name: "Cloud Storage Service",
+...     type: "service",
+...     price: 30
+...   },
+...   {
+...     name: "Antivirus Software",
+...     type: "software",
+...     price: 90
+...   },
+...   {
+...     name: "Consulting Service",
+...     type: "service",
+...     price: 120
+...   },
+...   {
+...     name: "VPN Software",
+...     type: "software",
+...     price: 80
+...   },
+...   {
+...     name: "Online Course",
+...     type: "service",
+...     price: 60
+...   },
+...   {
+...     name: "Web Hosting Service",
+...     type: "service",
+...     price: 110
+...   },
+...   {
+...     name: "Premium Software Package",
+...     type: "software",
+...     price: 200
+...   }
+... ]);
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('672d8f425b577c26890d81b9'),
+    '1': ObjectId('672d8f425b577c26890d81ba'),
+    '2': ObjectId('672d8f425b577c26890d81bb'),
+    '3': ObjectId('672d8f425b577c26890d81bc'),
+    '4': ObjectId('672d8f425b577c26890d81bd'),
+    '5': ObjectId('672d8f425b577c26890d81be'),
+    '6': ObjectId('672d8f425b577c26890d81bf'),
+    '7': ObjectId('672d8f425b577c26890d81c0')
+  }
+}
+items> // Query to find items where the type is "software" or "service" and price is less than $100
+
+items> db.items.find({
+...   $or: [
+...     { type: "software" },   // Type is "software"
+...     { type: "service" }     // Type is "service"
+...   ],
+...   price: { $lt: 100 }       // Price less than $100
+... });
+[
+  {
+    _id: ObjectId('672d8f425b577c26890d81b9'),
+    name: 'Photo Editing Software',
+    type: 'software',
+    price: 50
+  },
+  {
+    _id: ObjectId('672d8f425b577c26890d81ba'),
+    name: 'Cloud Storage Service',
+    type: 'service',
+    price: 30
+  },
+  {
+    _id: ObjectId('672d8f425b577c26890d81bb'),
+    name: 'Antivirus Software',
+    type: 'software',
+    price: 90
+  },
+  {
+    _id: ObjectId('672d8f425b577c26890d81bd'),
+    name: 'VPN Software',
+    type: 'software',
+    price: 80
+  },
+  {
+    _id: ObjectId('672d8f425b577c26890d81be'),
+    name: 'Online Course',
+    type: 'service',
+    price: 60
+  }
+]
+items> use employees
+switched to db employees
+employees> db.employees.insertMany([
+...   {
+...     name: "Alice",
+...     department: "Engineering",
+...     experience: 6
+...   },
+...   {
+...     name: "Bob",
+...     department: "HR",
+...     experience: 3
+...   },
+...   {
+...     name: "Charlie",
+...     department: "Engineering",
+...     experience: 8
+...   },
+...   {
+...     name: "David",
+...     department: "Sales",
+...     experience: 4
+...   },
+...   {
+...     name: "Eva",
+...     department: "HR",
+...     experience: 10
+...   },
+...   {
+...     name: "Frank",
+...     department: "Engineering",
+...     experience: 4
+...   },
+...   {
+...     name: "Grace",
+...     department: "HR",
+...     experience: 6
+...   }
+... ]);
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('672d8f825b577c26890d81c1'),
+    '1': ObjectId('672d8f825b577c26890d81c2'),
+    '2': ObjectId('672d8f825b577c26890d81c3'),
+    '3': ObjectId('672d8f825b577c26890d81c4'),
+    '4': ObjectId('672d8f825b577c26890d81c5'),
+    '5': ObjectId('672d8f825b577c26890d81c6'),
+    '6': ObjectId('672d8f825b577c26890d81c7')
+  }
+}
+employees> // Query to find employees with more than 5 years of experience in "Engineering" or "HR" departments
+
+employees> db.employees.find({
+...   $or: [
+...     { department: "Engineering" },   // Department is "Engineering"
+...     { department: "HR" }             // Department is "HR"
+...   ],
+...   experience: { $gt: 5 }             // Experience greater than 5 years
+... });
+[
+  {
+    _id: ObjectId('672c505f5c6ccf46e10d81aa'),
+    name: 'Alice Johnson',
+    age: 32,
+    experience: 6,
+    department: 'Engineering'
+  },
+  {
+    _id: ObjectId('672c505f5c6ccf46e10d81ac'),
+    name: 'Charlie Lee',
+    age: 35,
+    experience: 7,
+    department: 'Engineering'
+  },
+  {
+    _id: ObjectId('672c505f5c6ccf46e10d81ae'),
+    name: 'Eve Adams',
+    age: 40,
+    experience: 10,
+    department: 'HR'
+  },
+  {
+    _id: ObjectId('672c505f5c6ccf46e10d81af'),
+    name: 'Frank Moore',
+    age: 33,
+    experience: 6,
+    department: 'Engineering'
+  },
+  {
+    _id: ObjectId('672d8f825b577c26890d81c1'),
+    name: 'Alice',
+    department: 'Engineering',
+    experience: 6
+  },
+  {
+    _id: ObjectId('672d8f825b577c26890d81c3'),
+    name: 'Charlie',
+    department: 'Engineering',
+    experience: 8
+  },
+  {
+    _id: ObjectId('672d8f825b577c26890d81c5'),
+    name: 'Eva',
+    department: 'HR',
+    experience: 10
+  },
+  {
+    _id: ObjectId('672d8f825b577c26890d81c7'),
+    name: 'Grace',
+    department: 'HR',
+    experience: 6
+  }
+]
+employees> use orders
+switched to db orders
+orders> db.orders.insertMany([
+...   {
+...     order_id: 1,
+...     status: "urgent",
+...     total_amount: 1500,
+...     priority: "low"
+...   },
+...   {
+...     order_id: 2,
+...     status: "completed",
+...     total_amount: 1200,
+...     priority: "medium"
+...   },
+...   {
+...     order_id: 3,
+...     status: "urgent",
+...     total_amount: 500,
+...     priority: "high"
+...   },
+...   {
+...     order_id: 4,
+...     status: "pending",
+...     total_amount: 2000,
+...     priority: "high"
+...   },
+...   {
+...     order_id: 5,
+...     status: "urgent",
+...     total_amount: 1100,
+...     priority: "high"
+...   },
+...   {
+...     order_id: 6,
+...     status: "urgent",
+...     total_amount: 800,
+...     priority: "medium"
+...   },
+...   {
+...     order_id: 7,
+...     status: "completed",
+...     total_amount: 200,
+...     priority: "low"
+...   }
+... ]);
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('672d8fd35b577c26890d81c8'),
+    '1': ObjectId('672d8fd35b577c26890d81c9'),
+    '2': ObjectId('672d8fd35b577c26890d81ca'),
+    '3': ObjectId('672d8fd35b577c26890d81cb'),
+    '4': ObjectId('672d8fd35b577c26890d81cc'),
+    '5': ObjectId('672d8fd35b577c26890d81cd'),
+    '6': ObjectId('672d8fd35b577c26890d81ce')
+  }
+}
+orders> // Query to find urgent orders with total_amount > 1000 or priority is "high"
+
+orders> db.orders.find({
+...   $or: [
+...     { status: "urgent", total_amount: { $gt: 1000 } },  // Urgent and total amount > 1000
+...     { priority: "high" }                                  // Priority is "high"
+...   ]
+... });
+[
+  {
+    _id: ObjectId('672d8fd35b577c26890d81c8'),
+    order_id: 1,
+    status: 'urgent',
+    total_amount: 1500,
+    priority: 'low'
+  },
+  {
+    _id: ObjectId('672d8fd35b577c26890d81ca'),
+    order_id: 3,
+    status: 'urgent',
+    total_amount: 500,
+    priority: 'high'
+  },
+  {
+    _id: ObjectId('672d8fd35b577c26890d81cb'),
+    order_id: 4,
+    status: 'pending',
+    total_amount: 2000,
+    priority: 'high'
+  },
+  {
+    _id: ObjectId('672d8fd35b577c26890d81cc'),
+    order_id: 5,
+    status: 'urgent',
+    total_amount: 1100,
+    priority: 'high'
+  }
+]
+orders>
